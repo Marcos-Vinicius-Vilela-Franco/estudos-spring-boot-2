@@ -12,7 +12,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -27,8 +26,8 @@ public class UserModel {
     @NotBlank(message = "Insira um nome!")
     private String name;
 
-    @Email(message = "Insira um email válido!")
-    @NotNull
+    @NotBlank(message = "O campo e-mail é obrigatório")
+    @Email(message = "O e-mail fornecido é inválido")
     private String email;
 
     
