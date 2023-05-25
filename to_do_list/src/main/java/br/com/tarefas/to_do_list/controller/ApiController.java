@@ -3,6 +3,7 @@ package br.com.tarefas.to_do_list.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,31 +14,29 @@ import br.com.tarefas.to_do_list.model.TarefaModel;
 import br.com.tarefas.to_do_list.model.UserModel;
 import br.com.tarefas.to_do_list.repository.TarefaRepository;
 import br.com.tarefas.to_do_list.repository.UserRepository;
+import br.com.tarefas.to_do_list.service.ApiService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
 public class ApiController {
-     
+    
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private TarefaRepository tarefaRepository;
+    private ApiService service;
 
     @PostMapping("/create")
-    public UserModel create(@Valid @RequestBody UserModel obj){
-        return userRepository.save(obj);
+    public ResponseEntity<UserModel> create(@Valid @RequestBody UserModel obj){
+        return service.create(obj);
     }
 
-    @GetMapping("/list")
-    public List<UserModel> findAll(){
-        return userRepository.findAll();
-    }
+    // @GetMapping("/list")
+    // public List<UserModel> findAll(){
+    //     return userRepository.findAll();
+    // }
 
-    @PostMapping("/create/task")
-    public TarefaModel createTask(@Valid @RequestBody TarefaModel obj){
-        return tarefaRepository.save(obj);
-    }
+    // @PostMapping("/create/task")
+    // public TarefaModel createTask(@Valid @RequestBody TarefaModel obj){
+    //     return tarefaRepository.save(obj);
+    // }
 
 }

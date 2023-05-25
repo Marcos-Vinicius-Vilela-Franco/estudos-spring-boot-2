@@ -1,10 +1,6 @@
 package br.com.tarefas.to_do_list.model;
 
-
-
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
