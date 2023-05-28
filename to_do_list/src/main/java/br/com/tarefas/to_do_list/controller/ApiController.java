@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.tarefas.to_do_list.model.Mensagem;
 import br.com.tarefas.to_do_list.model.TarefaModel;
 import br.com.tarefas.to_do_list.model.UserModel;
-import br.com.tarefas.to_do_list.repository.TarefaRepository;
 import br.com.tarefas.to_do_list.service.ApiService;
 import jakarta.validation.Valid;
 
@@ -44,6 +44,11 @@ public class ApiController {
     @PostMapping("/create/task")
     public ResponseEntity<?> createTask(@Valid @RequestBody TarefaModel obj){
         return service.cereateTask(obj);
+    }
+
+    @PutMapping("/update/user")
+    public ResponseEntity<?>updateUser(@Valid @RequestBody UserModel obj){
+        return service.updateUser(obj);
     }
     // @GetMapping("/list")
     // public List<UserModel> findAll(){

@@ -48,13 +48,17 @@ public class ApiService {
         return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
     }
 
-    public ResponseEntity<?> cereateTask(@Valid @RequestBody TarefaModel obj){
+    public ResponseEntity<?> cereateTask(TarefaModel obj){
         if(userRepository.countById(obj.getUser().getId())==0){
             mensagem.setMensagem("O ID fornecido não existe!");
             return new ResponseEntity<Mensagem>(mensagem, HttpStatus.BAD_REQUEST);
         }else{
          return new ResponseEntity<>(tarefaRepository.save(obj), HttpStatus.CREATED);
         }
+    }
+
+    public ResponseEntity<?> updateUser(UserModel obj){
+        return new ResponseEntity<>(userRepository.save(obj), HttpStatus.OK);
     }
     
 }
