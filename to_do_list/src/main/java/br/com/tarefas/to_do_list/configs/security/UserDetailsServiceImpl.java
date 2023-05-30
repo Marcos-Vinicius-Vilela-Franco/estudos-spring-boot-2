@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username : " + username));
         // TODO Auto-generated method stub
         // return new User(userModel.getUsername(), userModel.getPassword(),true,true, true, true, null);
-        System.out.println("ta aqui " + username);
+        
         return userModel;
     }
     

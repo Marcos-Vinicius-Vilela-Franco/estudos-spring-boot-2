@@ -2,7 +2,10 @@ package br.com.tarefas.to_do_list.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import br.com.tarefas.to_do_list.enums.StatusTarefa;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,6 +28,9 @@ public class TarefaModel {
     @Size(max = 250)
     @NotBlank
     private String task;
+
+    @Enumerated(EnumType.STRING)
+    private StatusTarefa status;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

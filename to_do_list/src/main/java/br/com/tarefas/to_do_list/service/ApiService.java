@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import br.com.tarefas.to_do_list.configs.security.WebSecurityConfig;
 import br.com.tarefas.to_do_list.model.Mensagem;
 import br.com.tarefas.to_do_list.model.TarefaModel;
 import br.com.tarefas.to_do_list.model.UserModel;
@@ -28,7 +29,11 @@ public class ApiService {
     @Autowired
     private TarefaRepository tarefaRepository;
 
+    @Autowired
+    WebSecurityConfig webSecurityConfig;
+
     public ResponseEntity<UserModel> create(UserModel obj){
+        obj.setPassword(webSecurityConfig.passwordEncoder().encode(obj.getPassword()));
         return new ResponseEntity<>(userRepository.save(obj), HttpStatus.CREATED);
     }
 
