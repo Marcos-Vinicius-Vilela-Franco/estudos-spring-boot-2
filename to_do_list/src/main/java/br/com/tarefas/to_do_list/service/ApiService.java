@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+
 
 import br.com.tarefas.to_do_list.configs.security.WebSecurityConfig;
 import br.com.tarefas.to_do_list.model.Mensagem;
@@ -14,7 +14,7 @@ import br.com.tarefas.to_do_list.model.TarefaModel;
 import br.com.tarefas.to_do_list.model.UserModel;
 import br.com.tarefas.to_do_list.repository.TarefaRepository;
 import br.com.tarefas.to_do_list.repository.UserRepository;
-import jakarta.validation.Valid;
+
 
 
 @Service
@@ -32,9 +32,15 @@ public class ApiService {
     @Autowired
     WebSecurityConfig webSecurityConfig;
 
-    public ResponseEntity<UserModel> create(UserModel obj){
+    public ResponseEntity<?> create(UserModel obj){
+       
+        if(userRepository.findByEmail(obj.getEmail())!= null){
+            mensagem.setMensagem("Email já cadastrado!");
+            return new ResponseEntity<Mensagem>(mensagem, HttpStatus.CONFLICT);
+        }else{
         obj.setPassword(webSecurityConfig.passwordEncoder().encode(obj.getPassword()));
         return new ResponseEntity<>(userRepository.save(obj), HttpStatus.CREATED);
+        }
     }
 
    

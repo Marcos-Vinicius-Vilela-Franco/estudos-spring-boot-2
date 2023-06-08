@@ -27,7 +27,7 @@ public class ApiController {
     private ApiService service;
 
     @PostMapping("/create")
-    public ResponseEntity<UserModel> create(@Valid @RequestBody UserModel obj){
+    public ResponseEntity<?> create(@Valid @RequestBody UserModel obj){
         return service.create(obj);
     }
 
